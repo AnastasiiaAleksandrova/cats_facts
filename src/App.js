@@ -1,24 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import Facts from "./components/facts/Facts";
+import Header from "./components/header/Header";
+import MoreFacts from "./components/moreFacts/MoreFacts";
+
+const URL = "https://cat-fact.herokuapp.com/facts/random";
 
 function App() {
+
+  const [facts, setFacts] = useState([]);
+  const [error, setError] = useState(null);
+  const [progress, setProgress] = useState(true);
+
+  useEffect(() => {
+    fetchRandomFacts(5, "cat")
+  }, []);
+
+  function fetchRandomFacts(amount, animal) {
+    setProgress(true);
+    fetch(`${URL}?animal_type=${animal}&amount=${amount}`)
+      .then(response => response.json())
+      .then(facts => {
+        setFacts(facts);
+        setTimeout(() => setProgress(false), 500)
+      })
+      .catch(err => {
+        setError(err);
+        setTimeout(() => setProgress(false), 500)
+      })
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <Facts facts={facts} error={error} progress={progress} />
+      <MoreFacts onClick={() => fetchRandomFacts(5, "cat")} />
     </div>
   );
 }

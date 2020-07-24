@@ -1,0 +1,11 @@
+.app-bar {
+    display: flex;
+    align-self: center;
+    align-items: center;
+    
+}
+
+.app-bar-text {
+    margin: .5em;
+    font-size: 1.2em;
+}
