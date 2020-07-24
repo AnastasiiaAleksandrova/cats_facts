@@ -5,7 +5,7 @@ import "./MoreFacts.css";
 
 function MoreFacts(props) {
     return (
-        <div>
+        <div className="more-facts">
             <div className="more-facts-text">Have not decided yet...</div>
             <div>
                 <Button
