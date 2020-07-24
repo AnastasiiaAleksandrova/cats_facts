@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 import "./Header.css";
-import { AppBar } from '@material-ui/core';
-import PetsIcon from '@material-ui/icons/Pets';
+import { AppBar } from "@material-ui/core";
+import PetsIcon from "@material-ui/icons/Pets";
 
 
 function Header(props) {

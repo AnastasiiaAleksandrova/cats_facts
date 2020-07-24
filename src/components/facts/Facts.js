@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 import Fact from "../fact/Fact";
 import "./Facts.css";
-import { CircularProgress } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
+import { CircularProgress } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 
 
 
