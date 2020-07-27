@@ -4,7 +4,7 @@ import FactList from "./components/factList/FactList";
 import Header from "./components/header/Header";
 import ShowFactsButton from "./components/showFactsButton/ShowFactsButton";
 import { CircularProgress } from "@material-ui/core";
-import { Alert } from "@material-ui/lab";
+import { Alert, AlertTitle } from "@material-ui/lab";
 
 const URL = "https://cat-fact.herokuapp.com/facts/random";
 const AMOUNT = 5;
@@ -32,7 +32,10 @@ function App() {
   function fetchRandomFacts(amount, animal) {
     showProgress();
     fetch(`${URL}?animal_type=${animal}&amount=${amount}`)
-      .then(response => response.json())
+      .then(response => {
+        if (response.status !== 200) throw new Error(`Error code: ${response.status}`);
+        return response.json()
+      })
       .then(facts => {
         setTimeout(() => setFacts(facts), 500);
       })
@@ -50,10 +53,10 @@ function App() {
       )
     } else if (error) {
       return (
-
-        <Alert severity="error">An error occured. Please, try again later.</Alert>
-
-
+        <Alert severity="error" title="blabla">
+          <AlertTitle>Sorry, an error occured</AlertTitle>
+          {error.message}
+        </Alert>
       )
     } else {
       return (
