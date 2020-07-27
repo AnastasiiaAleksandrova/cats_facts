@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import Facts from "./components/facts/Facts";
+import FactList from "./components/factList/FactList";
 import Header from "./components/header/Header";
-import MoreFacts from "./components/moreFacts/MoreFacts";
+import ShowFactsButton from "./components/showFactsButton/ShowFactsButton";
+import { CircularProgress } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 
 const URL = "https://cat-fact.herokuapp.com/facts/random";
 const AMOUNT = 5;
@@ -10,32 +12,64 @@ const ANIMAL = "cat";
 
 function App() {
 
-  const [facts, setFacts] = useState([]);
+  const [facts, setFacts] = useState(null);
   const [error, setError] = useState(null);
-  const [progress, setProgress] = useState(true);
 
   useEffect(() => {
     fetchRandomFacts(AMOUNT, ANIMAL)
   }, []);
 
+  function showProgress() {
+    if (facts) {
+      setFacts(null)
+    }
+
+    if (error) {
+      setError(null)
+    }
+  }
+
   function fetchRandomFacts(amount, animal) {
-    setProgress(true);
+    showProgress();
     fetch(`${URL}?animal_type=${animal}&amount=${amount}`)
       .then(response => response.json())
       .then(facts => {
-        setFacts(facts);
-        setTimeout(() => setProgress(false), 500)
+        setTimeout(() => setFacts(facts), 500);
       })
       .catch(err => {
-        setError(err);
-        setTimeout(() => setProgress(false), 500)
+        setTimeout(() => setError(err), 500);
       })
   }
+
+  function renderContent() {
+    if (!facts && !error) {
+      return (
+        <div className="progress">
+          <CircularProgress />
+        </div>
+      )
+    } else if (error) {
+      return (
+
+        <Alert severity="error">An error occured. Please, try again later.</Alert>
+
+
+      )
+    } else {
+      return (
+        <React.Fragment>
+          <FactList facts={facts} />
+          <ShowFactsButton onClick={() => fetchRandomFacts(AMOUNT, ANIMAL)} />
+        </React.Fragment>
+      )
+    }
+  }
+
+
   return (
     <div className="App">
       <Header />
-      <Facts facts={facts} error={error} progress={progress} />
-      <MoreFacts onClick={() => fetchRandomFacts(AMOUNT, ANIMAL)} hide={progress} />
+      {renderContent()}
     </div>
   );
 }

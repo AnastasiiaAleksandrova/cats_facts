@@ -1,9 +1,9 @@
 import React from "react";
 import { Button } from "@material-ui/core";
-import "./MoreFacts.css";
+import "./ShowFactsButton.css";
 
 
-function MoreFacts(props) {
+function ShowFactsButton(props) {
     if (!props.hide) {
         return (
             <div className="more-facts">
@@ -13,7 +13,7 @@ function MoreFacts(props) {
                         variant="contained"
                         color="primary"
                         onClick={props.onClick}>
-                        Show me more facts
+                        Show me other facts
                 </Button>
                 </div>
             </div>
@@ -24,4 +24,4 @@ function MoreFacts(props) {
 
 }
 
-export default MoreFacts;
+export default ShowFactsButton;
