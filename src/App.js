@@ -5,6 +5,8 @@ import Header from "./components/header/Header";
 import MoreFacts from "./components/moreFacts/MoreFacts";
 
 const URL = "https://cat-fact.herokuapp.com/facts/random";
+const AMOUNT = 5;
+const ANIMAL = "cat";
 
 function App() {
 
@@ -13,7 +15,7 @@ function App() {
   const [progress, setProgress] = useState(true);
 
   useEffect(() => {
-    fetchRandomFacts(5, "cat")
+    fetchRandomFacts(AMOUNT, ANIMAL)
   }, []);
 
   function fetchRandomFacts(amount, animal) {
@@ -33,7 +35,7 @@ function App() {
     <div className="App">
       <Header />
       <Facts facts={facts} error={error} progress={progress} />
-      <MoreFacts onClick={() => fetchRandomFacts(5, "cat")} />
+      <MoreFacts onClick={() => fetchRandomFacts(AMOUNT, ANIMAL)} hide={progress} />
     </div>
   );
 }

@@ -20,7 +20,7 @@ function Facts(props) {
         return (
             <div className="facts">
                 {props.facts.map(fact => (
-                    <Fact key={fact.id} text={fact.text} />
+                    <Fact key={fact._id} text={fact.text} />
                 ))}
             </div>
         );

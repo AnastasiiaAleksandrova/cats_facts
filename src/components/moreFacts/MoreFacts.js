@@ -4,19 +4,24 @@ import "./MoreFacts.css";
 
 
 function MoreFacts(props) {
-    return (
-        <div className="more-facts">
-            <div className="more-facts-text">Have not decided yet...</div>
-            <div>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={props.onClick}>
-                    Show me more facts
-            </Button>
+    if (!props.hide) {
+        return (
+            <div className="more-facts">
+                <div className="more-facts-text">Have not decided yet...</div>
+                <div>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={props.onClick}>
+                        Show me more facts
+                </Button>
+                </div>
             </div>
-        </div>
-    );
+        );
+    } else {
+        return null;
+    }
+
 }
 
 export default MoreFacts;
