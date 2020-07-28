@@ -3,7 +3,6 @@ import Fact from "../fact/Fact";
 import "./FactList.css";
 
 function FactList(props) {
-
     return (
         <div className="facts">
             {props.facts.map(fact => (
@@ -11,7 +10,6 @@ function FactList(props) {
             ))}
         </div>
     );
-
 }
 
 export default FactList;

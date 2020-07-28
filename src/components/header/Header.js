@@ -4,7 +4,7 @@ import { AppBar } from "@material-ui/core";
 import PetsIcon from "@material-ui/icons/Pets";
 
 
-function Header(props) {
+function Header() {
     return (
         <AppBar position="static">
             <div className="app-bar">

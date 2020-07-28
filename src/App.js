@@ -33,7 +33,10 @@ function App() {
     showProgress();
     fetch(`${URL}?animal_type=${animal}&amount=${amount}`)
       .then(response => {
-        if (response.status !== 200) throw new Error(`Error code: ${response.status}`);
+        if (response.status !== 200) {
+          throw new Error(`Error code: ${response.status}`);
+        }
+
         return response.json()
       })
       .then(facts => {
