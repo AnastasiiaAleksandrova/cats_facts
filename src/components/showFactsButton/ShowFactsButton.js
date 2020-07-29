@@ -11,6 +11,7 @@ function ShowFactsButton(props) {
                 <Button
                     variant="contained"
                     color="primary"
+                    id="show-more-facts"
                     onClick={props.onClick}>
                     Show me other facts
                 </Button>
